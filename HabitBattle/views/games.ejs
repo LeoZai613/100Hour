@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videogame Time Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h2>Good habits and bad habits are a battle put your habits here, They will positively and negatively effect your character,
+        you may even find yourself in a battle! </h2>
+
+    <picture>
+
+
+        <img src="https://i.imgur.com/UdeQw0g.jpg">
+      </picture>
+
+    <h2>Please enter your Habit, how many points it's worth, and Difficulty:</h2>
+    <form action="/games/createGame" method='POST'>
+        <input type="text" placeholder="Habit" name='gameItem'>
+        <input type="text" placeholder="Exp Value" name='hoursPlayed'>
+        <input type="text" placeholder="Difficulty 1-10" name='dayPlayed'>
+        <input type="submit">
+    </form>
+    
+    <ul class="game-list">
+        <% games.forEach(details => { %>
+            <li class="game-list-item">
+                <div class="game-list-item-title"><%= details.title %></div>
+                <div class="game-list-item-hours"><%= details.hours %>  experience points</div>
+                <div class="game-list-item-day"><%= details.day %> difficulty on a scale of 1-10 </div>
+            </li>
+        <% }) %>
+    </ul>
+
+    <!-- <h2>Finished that game? Click on the underlined name to mark as complete.</h2>
+    <h2>Want to delete it? Click delete.</h2> -->
+
+    <ul> 
+        <% games.forEach( el => { %>
+        <h3>Accomplished what you wanted click here to say habit accomplished</h3>
+         <h3>Want to delete it? Click delete.</h3>
+                <li class='gameItem' data-id='<%=el._id%>'>
+                    <span class='<%= el.completed === true ? 'completed' : 'not'%>'><%= el.title %></span>
+                    <span class='del'> Delete </span>
+                </li>
+        <% }) %>    
+        </ul>
+
+    <h3><%= user.userName %> has <%= left %> habits(s) to conquer.</h3>
+
+
+    <h4>Health</h4>
+    <progress id="health" value="100" max="100"></progress>
+    <button class="decHealth">Gave Into a Bad Habit</button>
+    
+    
+
+<script>
+
+const decHealth= document.querySelectorAll('.decHealth')
+
+
+Array.from(decHealth).forEach((el)=>{
+    el.addEventListener('click', decHealth)
+
+ function decHealth(){
+            var health = document.getElementById("health")
+            health.value -= 10; 
+                }
+            })
+
+
+</script>
+
+
+<h3><%= user.userName %> has <%= left %> habits(s) to conquer.</h3>
+
+
+    <h4>Exp</h4>
+    <progress id="exp" value="0" max="100"></progress>
+    <button class="incExp">Implimented a Good Habit</button>
+    
+    
+
+<script>
+
+const incExp= document.querySelectorAll('.incExp')
+
+
+Array.from(incExp).forEach((el)=>{
+    el.addEventListener('click', incExp)
+
+ function incExp(){
+            var health = document.getElementById("exp")
+            exp.value += 10; 
+                }
+            })
+
+
+</script>
+
+
+
+    <a href="/logout">Logout</a>
+
+    <script src="js/main.js"></script>
+ 
+
+
+</body>
+</html>
